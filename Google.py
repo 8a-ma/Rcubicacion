@@ -9,8 +9,8 @@ from google.oauth2 import service_account
 import datetime
 
 def import_token(file):
-    storage_client = storage.Client('Ciudad Luz')
-    bucket = storage_client.get_bucket("ciudad-luz-440400-token")
+    storage_client = storage.Client(os.environ.get("STORAGE_CLIENT"))
+    bucket = storage_client.get_bucket(os.environ.get("BUCKET"))
     blob = bucket.blob(f"{file}")
     blob.download_to_filename(f"/tmp/{file}")
     print("Credentials downladed on /tmp/")
